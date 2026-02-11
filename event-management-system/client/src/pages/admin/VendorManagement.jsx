@@ -95,12 +95,12 @@ const VendorManagement = () => {
 
     const getCategoryColor = (category) => {
         const colors = {
-            'Catering': 'var(--primary-600)',
-            'Florist': 'var(--success)',
-            'Decoration': 'var(--secondary-600)',
-            'Lighting': 'var(--accent-600)'
+            'Catering': 'var(--success-light)',
+            'Florist': 'var(--info-light)',
+            'Decoration': 'var(--warning-light)',
+            'Lighting': 'var(--error-light)'
         };
-        return colors[category] || 'var(--gray-400)';
+        return colors[category] || 'var(--gray-200)';
     };
 
     const categoryOptions = [
@@ -204,9 +204,10 @@ const VendorManagement = () => {
                                         display: 'inline-block',
                                         padding: 'var(--space-xs) var(--space-sm)',
                                         background: getCategoryColor(vendor.category),
+                                        color: 'var(--black)',
                                         borderRadius: 'var(--radius-sm)',
                                         fontSize: 'var(--font-size-xs)',
-                                        fontWeight: 'var(--font-weight-bold)',
+                                        fontWeight: 'var(--font-weight-semibold)',
                                         marginBottom: 'var(--space-md)'
                                     }}>
                                         {vendor.category}

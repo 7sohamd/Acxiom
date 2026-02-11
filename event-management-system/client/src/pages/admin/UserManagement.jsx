@@ -97,10 +97,10 @@ const UserManagement = () => {
 
     const getRoleBadgeColor = (role) => {
         switch (role) {
-            case 'admin': return 'var(--error)';
-            case 'vendor': return 'var(--primary-600)';
-            case 'user': return 'var(--success)';
-            default: return 'var(--gray-400)';
+            case 'admin': return 'var(--error-light)';
+            case 'vendor': return 'var(--info-light)';
+            case 'user': return 'var(--success-light)';
+            default: return 'var(--gray-200)';
         }
     };
 
@@ -203,9 +203,10 @@ const UserManagement = () => {
                                             <span style={{
                                                 padding: 'var(--space-xs) var(--space-sm)',
                                                 background: getRoleBadgeColor(user.role),
+                                                color: 'var(--black)',
                                                 borderRadius: 'var(--radius-sm)',
                                                 fontSize: 'var(--font-size-xs)',
-                                                fontWeight: 'var(--font-weight-bold)',
+                                                fontWeight: 'var(--font-weight-semibold)',
                                                 textTransform: 'uppercase'
                                             }}>
                                                 {user.role}

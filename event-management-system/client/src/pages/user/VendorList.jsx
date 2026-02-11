@@ -15,6 +15,16 @@ const VendorList = () => {
 
     const categories = ['all', 'Catering', 'Florist', 'Decoration', 'Lighting'];
 
+    const getCategoryColor = (category) => {
+        const colors = {
+            'Catering': 'var(--success-light)',
+            'Florist': 'var(--info-light)',
+            'Decoration': 'var(--warning-light)',
+            'Lighting': 'var(--error-light)'
+        };
+        return colors[category] || 'var(--gray-200)';
+    };
+
     useEffect(() => {
         fetchVendors();
     }, [selectedCategory]);
@@ -87,9 +97,11 @@ const VendorList = () => {
                                     <span style={{
                                         display: 'inline-block',
                                         padding: 'var(--space-xs) var(--space-sm)',
-                                        background: 'var(--gradient-primary)',
+                                        background: getCategoryColor(vendor.category),
+                                        color: 'var(--black)',
                                         borderRadius: 'var(--radius-sm)',
                                         fontSize: 'var(--font-size-xs)',
+                                        fontWeight: 'var(--font-weight-semibold)',
                                         marginBottom: 'var(--space-md)'
                                     }}>
                                         {vendor.category}

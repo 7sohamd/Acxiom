@@ -66,12 +66,17 @@ const ShoppingCart = () => {
             <div className="container-md fade-in">
                 <div style={{
                     display: 'flex',
-                    justifyContent: 'space-between',
+                    flexDirection: 'column',
                     alignItems: 'center',
                     marginBottom: 'var(--space-2xl)'
                 }}>
-                    <h1>Shopping Cart</h1>
-                    <div style={{ display: 'flex', gap: 'var(--space-md)' }}>
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        width: '100%',
+                        marginBottom: 'var(--space-lg)',
+                        gap: 'var(--space-md)'
+                    }}>
                         <Button variant="secondary" onClick={() => navigate('/user/dashboard')}>
                             Home
                         </Button>
@@ -79,6 +84,7 @@ const ShoppingCart = () => {
                             Log Out
                         </Button>
                     </div>
+                    <h1 style={{ margin: 0 }}>Shopping Cart</h1>
                 </div>
 
                 {!loading && cart && cart.items && cart.items.length > 0 ? (
@@ -129,7 +135,7 @@ const ShoppingCart = () => {
                                         <div style={{ textAlign: 'right' }}>
                                             <p style={{
                                                 fontSize: 'var(--font-size-xl)',
-                                                fontWeight: 'var(--font-weight-bold)',
+                                                fontWeight: 'var(--font-weight-semibold)',
                                                 marginBottom: 'var(--space-md)',
                                                 color: 'var(--white)'
                                             }}>
@@ -151,7 +157,7 @@ const ShoppingCart = () => {
                         <Card>
                             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-xl)' }}>
                                 <h2>Total:</h2>
-                                <h2 style={{ color: 'var(--primary-500)' }}>₹{getTotalPrice().toFixed(2)}</h2>
+                                <h2 style={{ color: 'var(--white)' }}>₹{getTotalPrice().toFixed(2)}</h2>
                             </div>
 
                             <div style={{ display: 'flex', gap: 'var(--space-md)' }}>

@@ -103,9 +103,10 @@ const MembershipManagement = () => {
                                                 <span style={{
                                                     padding: 'var(--space-xs) var(--space-sm)',
                                                     background: getStatusColor(membership.status),
+                                                    color: 'var(--white)',
                                                     borderRadius: 'var(--radius-sm)',
                                                     fontSize: 'var(--font-size-xs)',
-                                                    fontWeight: 'var(--font-weight-bold)',
+                                                    fontWeight: 'var(--font-weight-semibold)',
                                                     textTransform: 'uppercase'
                                                 }}>
                                                     {membership.status}

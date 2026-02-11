@@ -252,8 +252,8 @@ const Checkout = () => {
                                         display: 'flex',
                                         justifyContent: 'space-between',
                                         fontSize: 'var(--font-size-xl)',
-                                        fontWeight: 'var(--font-weight-bold)',
-                                        color: 'var(--primary-500)'
+                                        fontWeight: 'var(--font-weight-semibold)',
+                                        color: 'var(--white)'
                                     }}>
                                         <span>Total:</span>
                                         <span>₹{getTotalPrice().toFixed(2)}</span>

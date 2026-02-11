@@ -32,7 +32,7 @@ const OrderStatus = () => {
             case 'Received':
                 return 'var(--warning)';
             case 'Ready for Shipping':
-                return 'var(--accent-600)';
+                return 'var(--info)';
             case 'Out For Delivery':
                 return 'var(--success)';
             default:
@@ -77,7 +77,7 @@ const OrderStatus = () => {
                                         <div style={{ textAlign: 'right' }}>
                                             <p style={{
                                                 fontSize: 'var(--font-size-xl)',
-                                                fontWeight: 'var(--font-weight-bold)',
+                                                fontWeight: 'var(--font-weight-semibold)',
                                                 color: 'var(--white)'
                                             }}>
                                                 ₹{order.totalAmount}

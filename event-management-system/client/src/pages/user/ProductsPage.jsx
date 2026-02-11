@@ -98,9 +98,9 @@ const ProductsPage = () => {
                                 )}
                                 <h3 style={{ marginBottom: 'var(--space-sm)' }}>{product.name}</h3>
                                 <p style={{
-                                    color: 'var(--primary-600)',
+                                    color: 'var(--white)',
                                     fontSize: 'var(--font-size-xl)',
-                                    fontWeight: 'var(--font-weight-bold)',
+                                    fontWeight: 'var(--font-weight-semibold)',
                                     marginBottom: 'var(--space-md)'
                                 }}>
                                     ₹{product.price}
