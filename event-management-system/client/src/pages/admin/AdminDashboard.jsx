@@ -27,7 +27,7 @@ const AdminDashboard = () => {
                 <Card>
                     <div style={{
                         display: 'grid',
-                        gridTemplateColumns: '1fr 1fr',
+                        gridTemplateColumns: 'repeat(2, 1fr)',
                         gap: 'var(--space-lg)'
                     }}>
                         <Button
@@ -44,6 +44,15 @@ const AdminDashboard = () => {
                             onClick={() => navigate('/admin/vendors')}
                         >
                             Maintain Vendor
+                        </Button>
+
+                        <Button
+                            variant="primary"
+                            size="lg"
+                            onClick={() => navigate('/admin/memberships')}
+                            style={{ gridColumn: 'span 2' }}
+                        >
+                            Membership Management
                         </Button>
                     </div>
                 </Card>

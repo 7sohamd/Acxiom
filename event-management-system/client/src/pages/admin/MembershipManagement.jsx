@@ -10,11 +10,28 @@ const MembershipManagement = () => {
     const navigate = useNavigate();
     const { logout } = useAuth();
     const [memberships, setMemberships] = useState([]);
+    const [vendors, setVendors] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showAddForm, setShowAddForm] = useState(false);
+    const [formData, setFormData] = useState({
+        vendorId: '',
+        duration: '6 months'
+    });
+    const [formMessage, setFormMessage] = useState('');
 
     useEffect(() => {
         fetchMemberships();
+        fetchVendors();
     }, []);
+
+    const fetchVendors = async () => {
+        try {
+            const data = await adminService.getAllVendorsAdmin();
+            setVendors(data.vendors);
+        } catch (error) {
+            console.error('Error fetching vendors:', error);
+        }
+    };
 
     const fetchMemberships = async () => {
         try {
@@ -45,6 +62,27 @@ const MembershipManagement = () => {
             fetchMemberships();
         } catch (error) {
             alert('Error cancelling membership: ' + error.response?.data?.message);
+        }
+    };
+
+    const handleAddMembership = async (e) => {
+        e.preventDefault();
+        setFormMessage('');
+
+        if (!formData.vendorId) {
+            setFormMessage('Please select a vendor');
+            return;
+        }
+
+        try {
+            await adminService.createMembership(formData);
+            setFormMessage('Membership created successfully!');
+            setShowAddForm(false);
+            setFormData({ vendorId: '', duration: '6 months' });
+            fetchMemberships();
+            setTimeout(() => setFormMessage(''), 3000);
+        } catch (error) {
+            setFormMessage('Error creating membership: ' + (error.response?.data?.message || error.message));
         }
     };
 
@@ -84,6 +122,92 @@ const MembershipManagement = () => {
                         </Button>
                     </div>
                 </div>
+
+                {formMessage && (
+                    <div style={{
+                        color: formMessage.includes('success') ? 'var(--success)' : 'var(--error)',
+                        marginBottom: 'var(--space-md)',
+                        textAlign: 'center',
+                        padding: 'var(--space-md)',
+                        background: 'var(--gray-800)',
+                        borderRadius: 'var(--radius-md)'
+                    }}>
+                        {formMessage}
+                    </div>
+                )}
+
+                <div style={{ marginBottom: 'var(--space-xl)' }}>
+                    <Button
+                        variant="success"
+                        onClick={() => setShowAddForm(!showAddForm)}
+                    >
+                        {showAddForm ? 'Cancel' : '+ Add New Membership'}
+                    </Button>
+                </div>
+
+                {showAddForm && (
+                    <Card style={{ marginBottom: 'var(--space-xl)' }}>
+                        <h2 style={{ marginBottom: 'var(--space-lg)' }}>Add New Membership</h2>
+                        <form onSubmit={handleAddMembership}>
+                            <div className="form-group">
+                                <label className="form-label">
+                                    Vendor <span style={{ color: 'var(--error)' }}>*</span>
+                                </label>
+                                <select
+                                    className="form-select"
+                                    value={formData.vendorId}
+                                    onChange={(e) => setFormData({ ...formData, vendorId: e.target.value })}
+                                    required
+                                >
+                                    <option value="">Select a vendor...</option>
+                                    {vendors.map((vendor) => (
+                                        <option key={vendor._id} value={vendor._id}>
+                                            {vendor.name} - {vendor.category}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="form-label">
+                                    Duration <span style={{ color: 'var(--error)' }}>*</span>
+                                </label>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+                                    {['6 months', '1 year', '2 years'].map((option) => (
+                                        <label
+                                            key={option}
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: 'var(--space-sm)',
+                                                cursor: 'pointer',
+                                                color: 'var(--gray-200)'
+                                            }}
+                                        >
+                                            <input
+                                                type="radio"
+                                                name="duration"
+                                                value={option}
+                                                checked={formData.duration === option}
+                                                onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
+                                                style={{ width: '20px', height: '20px', cursor: 'pointer' }}
+                                            />
+                                            <span>{option}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <Button
+                                variant="success"
+                                type="submit"
+                                style={{ width: '100%', marginTop: 'var(--space-md)' }}
+                            >
+                                Create Membership
+                            </Button>
+                        </form>
+                    </Card>
+                )}
 
                 {loading && <p style={{ color: 'var(--gray-300)' }}>Loading memberships...</p>}
 
