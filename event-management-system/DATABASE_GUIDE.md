@@ -33,41 +33,34 @@
 ### Method 2: MongoDB Shell (Command Line)
 
 ```bash
-# 1. Open Command Prompt or PowerShell
 
-# 2. Connect to MongoDB
+
 mongosh
 
-# 3. Switch to your database
+
 use event-management
 
-# 4. View collections
+
 show collections
 
-# 5. Query data
 
-# View all users
+
 db.users.find().pretty()
 
-# View all vendors
 db.vendors.find().pretty()
 
-# View all products
 db.products.find().pretty()
 
-# View all orders
 db. orders.find().pretty()
 
-# Count products
 db.products.countDocuments()
 
-# Find specific vendor by name
+
 db.vendors.findOne({ name: "Your Vendor Name" })
 
-# Find products by vendor
 db.products.find({ vendorId: "VENDOR_ID_HERE" }).pretty()
 
-# View last 5 orders
+
 db.orders.find().sort({ createdAt: -1 }).limit(5).pretty()
 ```
 
@@ -98,17 +91,13 @@ db.orders.find().sort({ createdAt: -1 }).limit(5).pretty()
 db.vendors.findOne({ userId: ObjectId("USER_ID_HERE") })
 ```
 
-### Check products for a vendor
-```javascript
 // First find your vendor
 db.vendors.findOne({ name: "Your Vendor Name" })
 
-// Copy the _id, then:
 db.products.find({ vendorId: ObjectId("VENDOR_ID_HERE") })
 ```
 
 ### Check user orders
-```javascript
 db.orders.find({ userId: ObjectId("USER_ID_HERE") }).pretty()
 ```
 
@@ -150,7 +139,6 @@ db.vendors.insertOne({
 2. Verify vendorId matches:
    ```javascript
    db.vendors.findOne({ name: "Your Name" })
-   // Copy the _id
    
    db.products.find({ vendorId: ObjectId("PASTE_ID_HERE") })
    ```
@@ -160,20 +148,18 @@ db.vendors.insertOne({
 ## Quick Test Commands
 
 ```bash
-# In mongosh:
 
-# Count everything
 db.users.countDocuments()
 db.vendors.countDocuments()
 db.products.countDocuments()
 db.orders.countDocuments()
 db.carts.countDocuments()
 
-# Drop a collection (BE CAREFUL!)
-db.products.drop()  # Deletes all products
 
-# Drop entire database (VERY CAREFUL!)
-db.dropDatabase()  # Deletes everything
+db.products.drop()  
+
+
+db.dropDatabase() 
 ```
 
 ---
